@@ -13,7 +13,7 @@ app.use(express.json());
 const expressError=require("./utils/expressError.js");
 const nodemailer = require("nodemailer");
 
-// Use environment variables with fallbacks
+
 const PORT = process.env.PORT || 3000;
 const DB_HOST = process.env.DB_HOST || 'localhost';
 const DB_USER = process.env.DB_USER || 'root';
@@ -501,34 +501,44 @@ app.route('/Show/:query')
                 console.error(err);
                 return res.status(500).send("Error fetching transactions");
             }
-            let q5 = `SELECT SUM(amount) as t_sum 
-                     FROM ${req.params.query} 
-                     WHERE borrower = ? AND lender = ?`;
-            let q6 = `SELECT SUM(amount) as t_sum1 
-                     FROM ${req.params.query} 
-                     WHERE borrower = ? AND lender = ?`;
 
-            Settlementconnection.query(q5, [userEntered_uname, req.params.query], (err, response) => {
-                if(err) {
-                    return res.status(500).send(err);
+            let totalYouOweFriend = 0;
+            let totalFriendOwesYou = 0;
+            let totalYouPaidOnSplit = 0;
+            
+            for (let t of transactions) {
+                if (t.lender === userEntered_uname && t.borrower === req.params.query) {
+                    totalFriendOwesYou += t.amount; // Friend owes you
+                } else if (t.lender === req.params.query && t.borrower === userEntered_uname) {
+                    totalYouOweFriend += t.amount; // You owe friend
                 }
-                
-                Settlementconnection.query(q6, [req.params.query, userEntered_uname], (err, response1) => {
-                    if(err) {
-                        return res.status(500).send(err);
-                    }
 
-                    res.render('./ShowPage/home-page.ejs', {
-                        title_friends: 'Chippin - Show',
-                        path_friends,
-                        query: req.params.query,
-                        fname: borrowerName,
-                        result: transactions,
-                        response,
-                        response1,
-                        currency: "1"
-                    });
-                });
+                // Calculate total you paid on split transactions (where you are lender and it was split equally)
+                if (t.lender === userEntered_uname && (t.settlement_option === '0' || t.settlement_option === '1')) {
+                    totalYouPaidOnSplit += t.amount;
+                }
+            }
+
+            let netBalance = totalFriendOwesYou - totalYouOweFriend; // Positive if friend owes you, negative if you owe friend
+
+            console.log("Debugging /Show/:query - Data for EJS:");
+            console.log("amountFriendOwesYou:", totalFriendOwesYou);
+            console.log("amountYouOweFriend:", totalYouOweFriend);
+            console.log("netBalance:", netBalance);
+            console.log("totalYouPaidOnSplit:", totalYouPaidOnSplit);
+            console.log("Transactions count:", transactions.length);
+
+            res.render('./ShowPage/home-page.ejs', {
+                title_friends: 'Chippin - Show',
+                path_friends,
+                query: req.params.query,
+                fname: borrowerName,
+                result: transactions,
+                amountFriendOwesYou: totalFriendOwesYou,
+                amountYouOweFriend: totalYouOweFriend,
+                netBalance: netBalance,
+                totalYouPaidOnSplit: totalYouPaidOnSplit,
+                currency: "1" // This is still a hardcoded value, might need adjustment later if currencies are dynamic
             });
         });
     });
