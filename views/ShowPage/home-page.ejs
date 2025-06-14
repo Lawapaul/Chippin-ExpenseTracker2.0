@@ -63,9 +63,9 @@
                 <div class="card bg-dark" style="width: 18rem;">
                     <div class="card-body">
                         <% if(currency === '0'){ %>
-                            <h1 class="card-title text-danger font-monospace">$<%= Math.abs(Number(response[0].t_sum || 0)) %></h1>
+                            <h1 class="card-title text-danger font-monospace">$<%= amountYouOweFriend.toFixed(2) %></h1>
                         <% } else { %>
-                            <h1 class="card-title text-danger font-monospace">₹<%= Math.abs(Number(response[0].t_sum || 0)) %></h1>
+                            <h1 class="card-title text-danger font-monospace">₹<%= amountYouOweFriend.toFixed(2) %></h1>
                         <% } %>
                         <p>You owe <%= fname %></p>
                     </div>
@@ -73,32 +73,37 @@
                 <div class="card bg-dark" style="width: 18rem;">
                     <div class="card-body">
                         <% if(currency === '0'){ %>
-                            <h1 class="card-title text-danger font-monospace">$<%= Math.abs(Number(response1[0].t_sum1 || 0)) %></h1>
+                            <h1 class="card-title text-danger font-monospace">$<%= amountFriendOwesYou.toFixed(2) %></h1>
                         <% } else { %>
-                            <h1 class="card-title text-danger font-monospace">₹<%= Math.abs(Number(response1[0].t_sum1 || 0)) %></h1>
+                            <h1 class="card-title text-danger font-monospace">₹<%= amountFriendOwesYou.toFixed(2) %></h1>
                         <% } %>
                         <p><%= fname %> owes you</p>
                     </div>
                 </div>
                 <div class="card bg-dark" style="width: 18rem;">
                     <div class="card-body">
-                        <% 
-                            const youOwe = Number(response[0].t_sum || 0);
-                            const friendOwe = Number(response1[0].t_sum1 || 0);
-                            const netAmount = Math.abs(youOwe - friendOwe);
-                        %>
                         <% if(currency === '0'){ %>
-                            <h1 class="card-title text-danger font-monospace">$<%= netAmount %></h1>
+                            <h1 class="card-title text-danger font-monospace">$<%= Math.abs(netBalance).toFixed(2) %></h1>
                         <% } else { %>
-                            <h1 class="card-title text-danger font-monospace">₹<%= netAmount %></h1>
+                            <h1 class="card-title text-danger font-monospace">₹<%= Math.abs(netBalance).toFixed(2) %></h1>
                         <% } %>
-                        <% if(youOwe > friendOwe){ %>
+                        <% if(netBalance < 0){ %>
                             <p>You owe <%= fname %></p>
-                        <% } else if(friendOwe > youOwe){ %>
+                        <% } else if(netBalance > 0){ %>
                             <p><%= fname %> owes you</p>
                         <% } else { %>
                             <p>Settled up!</p>
                         <% } %>
+                    </div>
+                </div>
+                <div class="card bg-dark" style="width: 18rem;">
+                    <div class="card-body">
+                        <% if(currency === '0'){ %>
+                            <h1 class="card-title text-danger font-monospace">$<%= totalYouPaidOnSplit.toFixed(2) %></h1>
+                        <% } else { %>
+                            <h1 class="card-title text-danger font-monospace">₹<%= totalYouPaidOnSplit.toFixed(2) %></h1>
+                        <% } %>
+                        <p>Total you paid for shared expenses</p>
                     </div>
                 </div>
             </div>
