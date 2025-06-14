@@ -23,6 +23,7 @@ const DB_NAME_EXPENSES = process.env.DB_NAME_EXPENSES || 'expenses';
 const DB_NAME_SETTLEMENTS = process.env.DB_NAME_SETTLEMENTS || 'ChippinSettlements';
 const EMAIL_USER = process.env.EMAIL_USER || 'customdomain.08@gmail.com';
 const EMAIL_PASS = process.env.EMAIL_PASS || 'tone nper jpig bfgc';
+const DB_PORT = process.env.DB_PORT || 3306;
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -44,21 +45,24 @@ const connection = mysql.createConnection({
   host: DB_HOST,
   user: DB_USER,
   database: DB_NAME,
-  password: DB_PASSWORD
+  password: DB_PASSWORD,
+  port: DB_PORT
 });
 
 const expenses = mysql.createConnection({
     host: DB_HOST,
     user: DB_USER,
     database: DB_NAME_EXPENSES,
-    password: DB_PASSWORD
+    password: DB_PASSWORD,
+    port: DB_PORT
 });
 
 const Settlementconnection = mysql.createConnection({
     host: DB_HOST,
     user: DB_USER,
     database: DB_NAME_SETTLEMENTS,
-    password: DB_PASSWORD
+    password: DB_PASSWORD,
+    port: DB_PORT
 });
 
 let new_f=true;
