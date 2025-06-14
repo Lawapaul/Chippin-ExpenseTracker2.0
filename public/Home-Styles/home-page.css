@@ -1,0 +1,93 @@
+body,html{
+    overflow: hidden;
+    margin: 0px;
+    color: white;
+    font-family: "winky rough";
+}
+.content{
+    width: 100%;
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.video{
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    right: 0;
+    left: 0;
+    z-index: -1;
+}
+.search_box,.addExpenseOuter{
+    padding: 20px 20px 20px 20px;
+    height: 300px;
+    width: 500px;
+    color: white;
+    display: flex;
+    align-content: space-between;
+    border-radius: 5px;
+    box-shadow: 1px 5px 10px white;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    
+}
+#friendSearch{
+    width: 470px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-bottom: 1px solid white;
+    height: 45px;
+    padding-left: 10px;
+    
+}
+.from-search-friend{
+    height: 155px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+}
+.addExpense{
+    color: white;
+    width: 500px;
+    height: 170px;
+}
+.form-add-expense{
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+
+}
+.dropdown, .add-btn{
+    height: 40px;
+}
+.errorBox{
+    height: 300px;
+    width: 300px;
+    padding-top: 40px;
+}
+.boxes{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.recentTransaction{
+    height: auto;
+    width: 500px;
+    border: 2px solid wheat;
+}
+.table{
+    width: 80%;
+    height: auto;
+}
+

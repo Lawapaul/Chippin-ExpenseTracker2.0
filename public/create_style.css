@@ -1,0 +1,155 @@
+body,html{  
+    margin: 0;
+    font-family: "winky rough";
+}
+.container{
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+video{
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    right: 0;
+    left: 0;
+    z-index: -1;
+}
+.create{
+    width: 550px;
+    height: 800px;
+    background-color: #F1E1E7;
+    min-height: 800px;
+    height: auto;  
+    border-radius: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    box-shadow: 5px 5px 5px #efd5d5;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.create form{
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    padding-left: 20px;
+}
+.create input[type="text"], input[type="password"]{
+    width: 100%;
+    height: 50px;
+    border: 0.5px solid black;
+    border-radius: 10px;
+    padding-left: 15px;
+    font-size: 0.9em;
+}
+.btn{
+    height: 50px;
+    width: 100%;
+    background-color: transparent;
+    border-radius: 10px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border: 0.5px solid black;
+}
+.btn:hover{
+    background-color: white;
+}
+label{
+    justify-items: center;
+}
+.individual{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 15px;
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+}
+.individual label{
+    height: 10px;
+    margin-bottom: 10px;
+}
+hr{
+    border-top: 1px solid black;
+}
+.box{
+    height: 500px;
+    width: 600px;
+    background-color: #F1E1E7;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #efd5d5;
+}
+.box input[type='text']{
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    font-size: 0.9em;
+    border: 0.5px solid black;
+    border-radius: 10px;
+}
+.box p{
+    width: 95%;
+    opacity: 0.5;
+}
+.form_class{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+form{
+    height: 74%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.code{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-content: space-between;
+}
+
+
+@media (max-width: 430px) and (min-width: 0px) {
+    .box {
+        width: 300px;
+    }
+    form {
+        height: 300px;
+    }
+    .create {
+        width: 350px;
+    }
+}
+
+@media (max-width: 391px) {
+    body, html {
+        overflow: scroll;
+    }
+    .create {
+        width: 330px;
+        height: 600px;
+    }
+    form {
+        height: 300px;
+    }
+}

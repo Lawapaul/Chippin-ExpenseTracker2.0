@@ -1,0 +1,108 @@
+body,html{  
+    overflow: hidden;
+    margin: 0;
+    font-family: "winky rough";
+}
+.container{
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+video{
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    right: 0;
+    left: 0;
+    z-index: -1;
+}
+.create{
+    width: 550px;
+    height: 600px;
+    background-color: #F1E1E7;
+    border-radius: 10px;
+    padding-bottom: 30px;
+    padding-right: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-shadow: 5px 5px 5px #efd5d5;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+.create form{
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    padding-left: 20px;
+}
+.create input[type="text"], input[type="password"]{
+    width: 100%;
+    height: 40px;
+    border: 0.5px solid black;
+    border-radius: 10px;
+    padding-left: 15px;
+    font-size: 0.9em;
+}
+.btn{
+    height: 40px;
+    width: 100%;
+    background-color: transparent;
+    border-radius: 10px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border: 0.5px solid black;
+}
+.btn:hover{
+    background-color: white;
+}
+label{
+    justify-items: center;
+}
+.individual{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 15px;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.individual label{
+    height: 10px;
+    margin-bottom: 10px;
+}
+hr{
+    border-top: 1px solid black;
+}
+.terms_condition{
+    height: 40px;
+    opacity: 0.6;
+    font-size: 1em;
+}
+.internal{
+    width: 45%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 75px;
+    
+}
+@media (max-width: 430px) and (min-width: 0px){
+    .create input[type="text"], input[type="password"]{
+        font-size: 0.7em;
+    }
+    .create{    
+        width: 400px;
+    }
+}

@@ -1,0 +1,105 @@
+body,html{
+    overflow: scroll;
+    margin: 0px;
+    color: white;
+    font-family: "winky rough";
+}
+.content{
+    width: 100%;
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.video{
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    margin: 0;
+
+}
+.heading{
+    height: 180px;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+    color: white;
+}
+.heading h1{
+    opacity: 0.8;
+}
+.friendBox{
+    height: 320px;
+    padding: 15px 15px 15px 15px;
+    width: 400px;
+    display: none;
+    border-radius: 15px;
+    margin-top: 80px;
+    z-index: 1;
+}
+.addfriendbtn{
+    margin-top: 70px;
+}
+.friendsCards{
+    height: calc(100vh - 180px);
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 50px;
+    justify-content: space-evenly;
+}
+.icon{
+    height: 50px;
+    width: 50px;
+    background-color: rgb(227, 221, 221);
+    border-radius: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+.fa-user{
+    font-size: 1.5em;
+}
+.title{
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-content: center;
+}
+.heading h1{
+    text-align: center;
+}
+
+.cardbox{
+    margin-top: 15px;
+    border-radius: 20px;
+}
+.cardbox:hover{
+    box-shadow: 1px 1px 5px white;
+    transform: translateY(-5px)
+}
+.individual{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.name{
+    border-bottom: 0.5px solid white;
+    
+}
+h1{
+    color: red;
+}

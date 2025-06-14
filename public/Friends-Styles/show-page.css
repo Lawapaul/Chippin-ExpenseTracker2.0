@@ -1,0 +1,281 @@
+.video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-fit: cover;
+}
+
+.content {
+    width: 100%;
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.box {
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+}
+
+.showData {
+    height: 800px auto;
+    border-radius: 20px;
+    width: 500px;
+    justify-content: center;
+}
+
+.newHeader {
+    height: 50px;
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Modal Specific Styles */
+#exampleModalCenter .modal-content {
+    background: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#exampleModalCenter .modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#exampleModalCenter .modal-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+#exampleModalCenter .form-control {
+    background-color: #1a1a1a !important;
+    color: white !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding: 12px 0;
+    font-size: 1rem;
+}
+
+#exampleModalCenter .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+#exampleModalCenter .form-control:focus {
+    background-color: #1a1a1a !important;
+    color: white !important;
+    border-color: #dc3545 !important;
+    box-shadow: none !important;
+}
+
+#exampleModalCenter .form-select {
+    background-color: #1a1a1a !important;
+    color: white !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding: 12px 0;
+    font-size: 1rem;
+}
+
+#exampleModalCenter .form-select:focus {
+    border-color: #dc3545 !important;
+    box-shadow: none !important;
+}
+
+#exampleModalCenter .form-select option {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 12px;
+}
+
+#exampleModalCenter .btn-check:checked + .btn-outline-light {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: white !important;
+}
+
+#exampleModalCenter .btn-outline-danger {
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    padding: 8px 20px;
+}
+
+#exampleModalCenter .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    padding: 8px 20px;
+}
+.summary{
+    background: rgba(17, 17, 17, 0.5);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0,);
+    height: 300px;
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.boxes{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.heading{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    height: 80px;
+}
+.settleup{
+    margin-top: 35px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+.card{
+    height: 140px;
+    border-radius: 15px;
+}
+.recentTransaction{
+    background: rgba(17, 17, 17, 0.5);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0,);
+    height: auto;
+    width: 60%;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.individual{
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    height: 90px;
+}
+.left{
+    width: 300px;
+    height: 100%;
+}
+.top{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 15px;
+    padding-left: 30px;
+}
+.bottom{
+    height: 50%;
+    width: 100%;
+    padding-left: 30px;
+}
+.right{
+    width: 300px;
+    height: 100%;
+}
+.individual:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+.card-body{
+    text-align: center;
+}
+.card-body p{
+    color: white;
+    opacity: 0.5;
+}
+.card:hover{
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+
+@media (max-width: 1628px) and (min-width: 0px){
+    .summary{
+        width: 95%;
+        height: 500px;
+    }
+    .card{
+        width: 100px;
+    }
+    .recentTransaction{
+        height: 700px;
+    }
+    .individual{
+        height: 90px;
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 10px;
+        padding-right: 10px;
+    }
+}
+@media (max-width: 1000px) {
+    .recentTransaction{
+        width: 95%;
+    }
+    .summary{
+        height: 70%;
+        align-content: flex-start;
+    }
+    .card{
+        margin-bottom: 20px;
+    }
+    .settleup{
+        position: relative;
+        bottom: -350px;
+    }
+    .top{
+        display: flex;
+    }
+    .individual{
+        height: auto;
+    }
+    .top p{
+        margin-top: 0px;
+    }
+    .left{
+        margin-left: -15px;
+    }
+    .right{
+        margin-right: -15px;
+    }
+}
+@media (min-width: 609px) and (max-width: 1000px){
+    .summary{
+        height: 55%;
+    }
+    .settleup{
+        position: relative;
+        top: 170px;
+    }
+}
+@media (max-width: 609px){
+    .settleup{
+        position: relative;
+        top: 320px;
+    }
+}

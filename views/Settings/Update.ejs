@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chippin - Update</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/Settings-Styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <%-include("../includes/navbar") %>
+    <video autoplay loop muted class="video">
+        <source src="/images/home-background.mp4" type="video/mp4">
+    </video>
+    <div class="content">
+        <div class="create bg-dark">
+            <form method="post" action="/ProfileUpdated"  class="updateForm needs-validation" novalidate>
+                <h1 class="text-white mb-5 font-monospace">Update your Profile</h1>
+                <div class="individual">
+                    <div class="internal">
+                        <label for="i_name" class="form-label">Full Name</label>
+                        <input type="text" placeholder="Enter Full Name" id="i_name" name="name" class="form-control" value="<%= result.name %>" required></div>
+                    <div class="internal">
+                        <label for="i_username" class="form-label">Username</label>
+                        <input type="text" placeholder="Enter Username" id="i_username" name="username" class="form-control" value="<%= result.username %>" required>
+                    </div>
+                </div>
+                <div class="individual">
+                    <div class="internal">
+                        <label for="i_password" class="form-label">Password</label>
+                        <input type="password" placeholder="Create Password" id="i_password" name="password" class="form-control" value="<%= result.password %>" required>
+                        </div>
+                    <div class="internal">
+                        <label for="i_email" class="form-label">Email</label>
+                        <input type="text" placeholder="Enter your Email" id="i_email" name="email" class="form-control" value="<%= result.email %>" required>
+                    </div>
+                </div>
+                <div class="individual">
+                    <div class="internal">
+                        <label for="i_pno" class="form-label">Phone Number</label>
+                        <input type="text" placeholder="Enter your Phone Number" id="i_pno" name="pno" class="form-control" value="<%= result.phone_number %>" required>
+                    </div>
+                </div>
+                <div class="individual">
+                    <form action="/Profile/Update?grant=accessgranted" method="post">
+                        <button class="btn btn-outline-danger mb-2 mt-3">Update</button>
+                    </form>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+    <%- include("../includes/needs_validation_bootstrap.ejs") %>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+</html>
+    

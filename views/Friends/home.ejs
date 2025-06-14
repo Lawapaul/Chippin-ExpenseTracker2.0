@@ -1,0 +1,60 @@
+<%- layout("Friends/boilerplate.ejs") %>
+<div class="heading">
+    <h1 class="font-monospace">My Friends</h1>
+    <% if(message && message!==null){ %>
+        <br>
+        <p class="opacity-50 mt-2"> <%= message %></p>
+    <% } else { %>
+        <p class="opacity-50 mt-2">Keep track of your friends and their details in one beautiful place</p>
+    <% } %>
+    <form>
+        <button type="button" class="btn btn-outline-danger addFriend" data-bs-toggle="modal" data-bs-target="#friendModal">+ Add Friend</button>
+    </form>
+</div>
+
+
+<div class="modal fade" id="friendModal" tabindex="-1" aria-labelledby="friendModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+                <h1 class="modal-title font-monospace text-white w-100 text-center" id="friendModalLabel">Add New Friend</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Friends" class="needs-validation" novalidate>
+                    <label class="form-label mt-4 opacity-70 text-white" for="addfriend">Enter Username</label>
+                    <input type="text" name="username" id="addfriend" class="form-control" placeholder="Enter friend's username....." required>
+                    <button class="btn btn-outline-danger w-100 addfriendbtn mt-4">Add Friend</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="friendsCards row row-cols-lg-3-md-4 g-3">
+    <% if(resu && resu.length > 0) { %>
+        <% for(let i = 0; i < resu.length; i++) { %>
+            <div class="card cardbox bg-dark text-white" style="width: 25rem; height: 270px; border-radius: 20px">
+                <div class="individual mt-4" style="width: 100%;">
+                    <img src="/images/9730638.png" class="card-img-top ms-2" alt="..." style="width: 100px;">
+                    <h3 class="card-title ms-3 mt-4 name"><%= resu[i].friend_name %></h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Making expense tracking fun together, Your reliable friend for shared finances!</p>
+                    <div class="btns w-100 d-flex">
+                    <form method="get" action="/show/<%=resu[i].friend_table_name %>">
+                        <button class="btn btn-outline-danger ms-2">Show Transactions</button>
+                    </form>
+                      <form method="post" action="/Delete/<%=resu[i].friend_table_name %>?_method=DELETE">
+                        <button class="btn btn-danger ms-2">Delete</button>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    <% } else { %>
+        <div class="col-12 text-center">
+            <p class="text-muted">No friends added yet. Add some friends to start tracking expenses!</p>
+        </div>
+    <% } %>
+</div>

@@ -1,0 +1,166 @@
+body,html{
+    overflow: hidden;
+    margin: 0;
+    font-family: "winky rough";
+}
+.container{
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+video{
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    right: 0;
+    left: 0;
+    z-index: -1;
+}
+.btn{
+    height: 50px;
+    width: 100%;
+    background-color: transparent;
+    border-radius: 10px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border: 0.5px solid black;
+}
+.btn:hover{
+    background-color: white;
+}
+
+.individual{
+    height: 210px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    padding-top: 30px;
+}
+
+.box{
+    height: 400px;
+    width: 500px;
+    background-color: #F1E1E7;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 0px 15px 0px 15px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #efd5d5;
+}
+.code{
+    width: 100%;
+}
+
+.individual form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 10px;
+    padding-top: 40px;
+}
+
+.individual input[type="text"]{
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    font-size: 0.9em;
+    border: 0.5px solid black;
+    border-radius: 10px;
+}
+
+.input{
+    width: 100%;    
+    height: 160px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+
+}
+.input input[type='text']{
+    width: 97%;
+    padding-left: 3%;
+    font-size: 0.9em;
+    border: 0.5px solid black;
+    border-radius: 10px;
+    height: 50px;
+}
+.text{
+    height: 150px;
+}
+.outer{
+    height: 420px;
+    width: 500px;
+    background-color: #F1E1E7;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 0px 15px 0px 15px;
+    padding-top: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #efd5d5;
+}
+.continue{
+    height: 230px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+}
+.success{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.new_pass{
+    width: 100%;
+    height: 80%;
+}
+.button_continue{
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+@media (max-width: 430px) and (min-width: 0px){
+    .box{
+        width: 350px;
+    }
+    .outer{
+        width: 360px;
+    }
+    .individual{
+        padding-top: 0px;
+        height: 180px;
+        margin-top: 60px;
+
+    }
+    
+}
+@media (max-width: 391px){
+    .box{
+        width: 300px;
+    }
+    .outer{
+        width: 320px;
+        height: 410px;
+    }
+    .input{
+        margin-top: 11px;
+    }
+    .individual{
+        padding-top: 10px;
+        height: 175px;
+    }
+}

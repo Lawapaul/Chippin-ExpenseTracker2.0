@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chippin - Show</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Friends-Styles/show-page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <%-include("../includes/navbar") %>
+    <video autoplay loop muted class="video">
+        <source src="/images/home-background.mp4" type="video/mp4">
+    </video>
+    <div class="content">
+        <div class="newHeader w-100">
+            <button type="button" class="btn btn-outline-danger mt-4" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                Add new Expense
+            </button>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content bg-dark">
+                        <div class="modal-header" style="border: none;">
+                            <h1 class="modal-title text-white font-monospace" id="exampleModalCenterTitle" style="text-align: center;">Settlement with <%= fname %></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style="border: none;">
+                            <form method="post" action="/Show/<%= query %>" class="needs-validation form-add-expense" novalidate>
+                                <div class="div-currency w-10 d-flex justify-content-sm-between mb-4">
+                                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked value="0">
+                                        <label class="btn btn-outline-light" for="btnradio1">$</label>
+                                        <input type="radio" class="btn-check me-3" name="btnradio" id="btnradio2" autocomplete="off" value="1">
+                                        <label class="btn btn-outline-light" for="btnradio2">₹</label>
+                                    </div>
+                                    
+                                    <input type="number" placeholder="Enter Amount" class="form-control bg-dark text-white amount ms-4" style="width: 500px; border: none; border-bottom: 0.5px solid white;" required name="amount">
+                                </div>   
+                                <input type="text" placeholder="Enter Description" class="form-control bg-dark text-white description mb-4" style="width: 100%; border: none; border-bottom: 0.5px solid white;" required name="description">
+                                <select class="form-select dropdown mb-4 bg-dark text-white" aria-label="Default select example" name="settlementDetail">
+                                    <option value="0">Paid by you and Split Equally</option>
+                                    <option value="1">Paid by <%= fname %> and Split Equally</option>
+                                    <option value="2"><%= fname %> ows you</option>
+                                    <option value="3">You owe <%= fname %></option>
+                                </select>
+                                <div class="modal-footer" style="border: none;">
+                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="summary mt-4">
+            <div class="heading ">
+                <h3 class="text-white font-monospace">Settlement Summary</h3>
+            </div>
+            <div class="boxes">
+                <div class="card bg-dark" style="width: 18rem;">
+                    <div class="card-body">
+                        <% if(currency === '0'){ %>
+                            <h1 class="card-title text-danger font-monospace">$<%= Math.abs(Number(response[0].t_sum || 0)) %></h1>
+                        <% } else { %>
+                            <h1 class="card-title text-danger font-monospace">₹<%= Math.abs(Number(response[0].t_sum || 0)) %></h1>
+                        <% } %>
+                        <p>You owe <%= fname %></p>
+                    </div>
+                </div>
+                <div class="card bg-dark" style="width: 18rem;">
+                    <div class="card-body">
+                        <% if(currency === '0'){ %>
+                            <h1 class="card-title text-danger font-monospace">$<%= Math.abs(Number(response1[0].t_sum1 || 0)) %></h1>
+                        <% } else { %>
+                            <h1 class="card-title text-danger font-monospace">₹<%= Math.abs(Number(response1[0].t_sum1 || 0)) %></h1>
+                        <% } %>
+                        <p><%= fname %> owes you</p>
+                    </div>
+                </div>
+                <div class="card bg-dark" style="width: 18rem;">
+                    <div class="card-body">
+                        <% 
+                            const youOwe = Number(response[0].t_sum || 0);
+                            const friendOwe = Number(response1[0].t_sum1 || 0);
+                            const netAmount = Math.abs(youOwe - friendOwe);
+                        %>
+                        <% if(currency === '0'){ %>
+                            <h1 class="card-title text-danger font-monospace">$<%= netAmount %></h1>
+                        <% } else { %>
+                            <h1 class="card-title text-danger font-monospace">₹<%= netAmount %></h1>
+                        <% } %>
+                        <% if(youOwe > friendOwe){ %>
+                            <p>You owe <%= fname %></p>
+                        <% } else if(friendOwe > youOwe){ %>
+                            <p><%= fname %> owes you</p>
+                        <% } else { %>
+                            <p>Settled up!</p>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <div class="settleup w-100 h-50px">
+                <form class="w-100 d-flex justify-content-center" method="post" action="/Show/<%=query%>?_method=DELETE">
+                    <button class="btn btn-outline-danger">Settle Up</button>
+                </form>
+            </div>
+        </div>
+        <div class="recentTransaction mt-4">
+            <div class="headerHeading">
+                <h2 style="color: white;" class="font-monospace">Recent Expenses</h2>
+                <p class="text-white" style="opacity: 0.5;">All shared expenses between you and <%= fname %></p>
+            </div>
+            <% for (let i in result){ %>
+                <div class="individual w-100 bg-dark text-white mb-4" >
+                    <div class="left">
+                        <div class="top">
+                            <p class="font-monospace"> <i class="fa-solid fa-money-check-dollar me-2 h-100 mt-2"></i><b><%= result[i].description %></b></p>
+                        </div>
+                        <div class="bottom ms-4" style="font-size: 0.9rem; opacity: 0.5">
+                            <p class="ms-1"><%= result[i].dateadded %></p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="top">
+                            <% if(result[i].currency === '0'){ %>
+                                <b><p>$ <%= Math.abs(result[i].amount) %></p></b>
+                            <% } else { %>
+                                <b><p>₹ <%= Math.abs(result[i].amount) %></p></b>
+                            <% } %>
+                        </div>
+                        <div class="bottom">
+                            <% if(result[i].currency === '0'){ %>
+                                <% if(result[i].settlement_option === '0'){ %>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>$<%= Math.abs(result[i].amount * 2) %></b> by you and split equally</p>
+                                <% } else if(result[i].settlement_option === '1'){ %>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>$<%= Math.abs(result[i].amount * 2) %></b> by <%= fname %> and split equally</p>
+                                <% } else if(result[i].settlement_option === '2'){ %>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2"><%= fname %> owes you <b>$<%= Math.abs(result[i].amount) %></b></p>
+                                <% } else { %>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">You owe <%= fname %> <b>$<%= Math.abs(result[i].amount) %></b></p>
+                                <% } %>
+                            <% } else { %>
+                                <% if(result[i].settlement_option === '0'){ %>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>₹<%= Math.abs(result[i].amount * 2) %></b> by you and split equally</p>
+                                <% } else if(result[i].settlement_option === '1'){ %>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>₹<%= Math.abs(result[i].amount * 2) %></b> by <%= fname %> and split equally</p>
+                                <% } else if(result[i].settlement_option === '2'){ %>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2"><%= fname %> owes you <b>₹<%= Math.abs(result[i].amount) %></b></p>
+                                <% } else { %>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">You owe <%= fname %> <b>₹<%= Math.abs(result[i].amount) %></b></p>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+        </div>
+    </div>
+    <%- include("../includes/needs_validation_bootstrap.ejs") %>
+    <script src="./Javascript/modelScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
