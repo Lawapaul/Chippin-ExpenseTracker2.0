@@ -131,31 +131,38 @@
                     <div class="right">
                         <div class="top">
                             <% if(result[i].currency === '0'){ %>
-                                <b><p>$ <%= Math.abs(result[i].amount) %></p></b>
+                                <b><p>$ <%= Math.abs(result[i].amount).toFixed(2) %></p></b>
                             <% } else { %>
-                                <b><p>₹ <%= Math.abs(result[i].amount) %></p></b>
+                                <b><p>₹ <%= Math.abs(result[i].amount).toFixed(2) %></p></b>
                             <% } %>
                         </div>
                         <div class="bottom">
+                            <% 
+                                let paidByText = '';
+                                if (result[i].lender === loggedInUsername) {
+                                    paidByText = 'you';
+                                } else if (result[i].lender === query) {
+                                    paidByText = fname; // Friend's name
+                                } else {
+                                    paidByText = 'someone else'; // Fallback just in case
+                                }
+                            %>
+
                             <% if(result[i].currency === '0'){ %>
-                                <% if(result[i].settlement_option === '0'){ %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>$<%= Math.abs(result[i].amount * 2) %></b> by you and split equally</p>
-                                <% } else if(result[i].settlement_option === '1'){ %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>$<%= Math.abs(result[i].amount * 2) %></b> by <%= fname %> and split equally</p>
+                                <% if(result[i].settlement_option === '0' || result[i].settlement_option === '1'){ %>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>$<%= Math.abs(result[i].amount * 2).toFixed(2) %></b> by <%= paidByText %> and split equally</p>
                                 <% } else if(result[i].settlement_option === '2'){ %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2"><%= fname %> owes you <b>$<%= Math.abs(result[i].amount) %></b></p>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2"><%= fname %> owes you <b>$<%= Math.abs(result[i].amount).toFixed(2) %></b></p>
                                 <% } else { %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">You owe <%= fname %> <b>$<%= Math.abs(result[i].amount) %></b></p>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">You owe <%= fname %> <b>$<%= Math.abs(result[i].amount).toFixed(2) %></b></p>
                                 <% } %>
                             <% } else { %>
-                                <% if(result[i].settlement_option === '0'){ %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>₹<%= Math.abs(result[i].amount * 2) %></b> by you and split equally</p>
-                                <% } else if(result[i].settlement_option === '1'){ %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>₹<%= Math.abs(result[i].amount * 2) %></b> by <%= fname %> and split equally</p>
+                                <% if(result[i].settlement_option === '0' || result[i].settlement_option === '1'){ %>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>₹<%= Math.abs(result[i].amount * 2).toFixed(2) %></b> by <%= paidByText %> and split equally</p>
                                 <% } else if(result[i].settlement_option === '2'){ %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2"><%= fname %> owes you <b>₹<%= Math.abs(result[i].amount) %></b></p>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2"><%= fname %> owes you <b>₹<%= Math.abs(result[i].amount).toFixed(2) %></b></p>
                                 <% } else { %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">You owe <%= fname %> <b>₹<%= Math.abs(result[i].amount) %></b></p>
+                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">You owe <%= fname %> <b>₹<%= Math.abs(result[i].amount).toFixed(2) %></b></p>
                                 <% } %>
                             <% } %>
                         </div>

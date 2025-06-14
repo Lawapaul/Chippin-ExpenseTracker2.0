@@ -538,7 +538,8 @@ app.route('/Show/:query')
                 amountYouOweFriend: totalYouOweFriend,
                 netBalance: netBalance,
                 totalYouPaidOnSplit: totalYouPaidOnSplit,
-                currency: "1" // This is still a hardcoded value, might need adjustment later if currencies are dynamic
+                currency: "1", // This is still a hardcoded value, might need adjustment later if currencies are dynamic
+                loggedInUsername: userEntered_uname // Pass the logged-in user's username
             });
         });
     });
