@@ -86,9 +86,14 @@ app.use('/profile',profileRouter)
 app.use("/expenses",expenseRouter);
 app.use("/settlement",settlementRouter);
 
+// Add root route handler
+app.get('/', (req, res) => {
+    res.redirect('/home');
+});
 
+// Handle all other routes - redirect to home instead of showing 404
 app.use('*',(req,res,next)=>{
-    next(new expressError(404,"Page Not Found!"));
+    res.redirect('/home');
 });
 
 app.use((err,req,res,next)=>{
