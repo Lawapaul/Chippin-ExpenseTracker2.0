@@ -1,6 +1,8 @@
 body,html{  
     margin: 0;
     font-family: "winky rough";
+    background-image: url("./images/Background-Image.webp");
+    background-size: cover;
 }
 .container{
     width: 100%;
@@ -11,17 +13,7 @@ body,html{
     justify-content: center;
     align-items: center;
 }
-video{
-    height: 100vh;
-    width: 100%;
-    position: absolute;
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-    right: 0;
-    left: 0;
-    z-index: -1;
-}
+
 .create{
     width: 550px;
     height: 800px;

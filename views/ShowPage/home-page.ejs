@@ -1,179 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chippin - Show</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/Friends-Styles/show-page.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-    <%-include("../includes/navbar") %>
-    <video autoplay loop muted class="video">
-        <source src="/images/home-background.mp4" type="video/mp4">
-    </video>
-    <div class="content">
-        <div class="newHeader w-100 d-flex justify-content-center">
-            <button type="button" class="btn btn-outline-danger mt-4" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                Add new Expense
-            </button>
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content bg-dark">
-                        <div class="modal-header" style="border: none;">
-                            <h1 class="modal-title text-white font-monospace" id="exampleModalCenterTitle" style="text-align: center;">Settlement with <%= fname %></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<%-layout("./boilerplate/boilerplate_HomePage")%>
+<div class="expense-summary-container">
+    <div class="expense-card">
+        <% if(user){ %>
+            <div class="amount"><%= user %></div>
+            <div class="label"><%=currentUser.name %></div>
+        <% } else{ %>
+            <div class="amount">NIL</div>
+            <div class="label"><%=currentUser.name %></div>
+        <%} %>
+    </div>
+    <div class="expense-card">
+        <% if(front){ %>
+            <div class="amount"><%=front%></div>
+            <div class="label"><%=friend.name %></div>
+        <% } else{ %>
+            <div class="amount">NIL</div>
+            <div class="label"><%=friend.name%></div>
+        <% } %>
+    </div>
+    <div class="expense-card">
+        <% if(typeof total_expenses !== 'undefined'){ %>
+            <div class="amount"><%= total_expenses %></div>
+            <div class="label">Total Expenses</div>
+        <% } else{ %>
+            <div class="amount">NIL</div>
+            <div class="label">Total Expenses</div>
+        <%}%>  
+    </div>
+</div>
+<div class="show-expenses ps-3 pt-3 pe-3">
+    <div class="title w-100">
+        <h4 class="font-monospace text-white"><b>Expense List</b></h4>
+        <p style="color: white; opacity: 0.6">View and manage your expenses</p>
+    </div>
+    <button type="button" class="add-expense-btn" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+        Add new Expense
+    </button>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark">
+                <div class="modal-header" style="border: none;">
+                    <h1 class="modal-title text-white font-monospace" id="exampleModalCenterTitle" style="text-align: center;">Add Expense</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="border: none;">
+                    <form method="post" action="/settlement/<%=id%>" class="needs-validation form-add-expense" novalidate>
+                        <div class="div-currency w-10 d-flex justify-content-sm-between mb-4">
+                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked value="dollor">
+                                <label class="btn btn-outline-light" for="btnradio1">$</label>
+                                <input type="radio" class="btn-check me-3" name="btnradio" id="btnradio2" autocomplete="off" value="ruppee">
+                                <label class="btn btn-outline-light" for="btnradio2">₹</label>
+                            </div>
+                            <input type="number" placeholder="Enter Amount" class="form-control bg-dark text-white amount ms-4" style="width: 500px; border: none; border-bottom: 0.5px solid white;" required name="amount">
+                        </div>   
+                        <label for="dateInput" style="color: white;">Date</label>
+                        <input type="date" id="dateInput" class="form-control description mb-4 mt-1 bg-dark text-white" style="width: 100%; border: none; border-bottom: 0.5px solid white;" required name="date">
+                        <textarea rows="5" cols="52" placeholder="Enter Description" style="padding-left: 10px; padding-top: 5px" class="bg-dark text-white form-control" name="description" required></textarea>
+                        <select class="form-select bg-dark text-white mt-3" aria-label="Default select example" name="details">
+                            <option value="you/2">Paid By you and split equally</option>
+                            <option value="friend/2">Paid By friend and split equally</option>
+                            <option value="you">Your Friend owes you</option>
+                            <option value="friend">You owe your friend</option>
+                        </select>
+                        <div class="modal-footer" style="border: none;">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Save changes</button>
                         </div>
-                        <div class="modal-body" style="border: none;">
-                            <form method="post" action="/Show/<%= query %>" class="needs-validation form-add-expense" novalidate>
-                                <div class="div-currency w-10 d-flex justify-content-sm-between mb-4">
-                                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked value="0">
-                                        <label class="btn btn-outline-light" for="btnradio1">$</label>
-                                        <input type="radio" class="btn-check me-3" name="btnradio" id="btnradio2" autocomplete="off" value="1">
-                                        <label class="btn btn-outline-light" for="btnradio2">₹</label>
-                                    </div>
-                                    
-                                    <input type="number" placeholder="Enter Amount" class="form-control bg-dark text-white amount ms-4" style="width: 500px; border: none; border-bottom: 0.5px solid white;" required name="amount">
-                                </div>   
-                                <input type="text" placeholder="Enter Description" class="form-control bg-dark text-white description mb-4" style="width: 100%; border: none; border-bottom: 0.5px solid white;" required name="description">
-                                <select class="form-select dropdown mb-4 bg-dark text-white" aria-label="Default select example" name="settlementDetail">
-                                    <option value="0">Paid by you and Split Equally</option>
-                                    <option value="1">Paid by <%= fname %> and Split Equally</option>
-                                    <option value="2"><%= fname %> ows you</option>
-                                    <option value="3">You owe <%= fname %></option>
-                                </select>
-                                <div class="modal-footer" style="border: none;">
-                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-danger">Save changes</button>
-                                </div>
-                            </form>
-                        </div>
-                        
-                    </div>
+                    </form>
                 </div>
             </div>
-        </div>
-        <div class="summary mt-4">
-            <div class="heading ">
-                <h3 class="text-white font-monospace">Settlement Summary</h3>
-            </div>
-            <div class="boxes">
-                <div class="card bg-dark" style="width: 18rem;">
-                    <div class="card-body">
-                        <% if(currency === '0'){ %>
-                            <h1 class="card-title text-danger font-monospace">$<%= amountYouOweFriend.toFixed(2) %></h1>
-                        <% } else { %>
-                            <h1 class="card-title text-danger font-monospace">₹<%= amountYouOweFriend.toFixed(2) %></h1>
-                        <% } %>
-                        <p>You owe <%= fname %></p>
-                    </div>
-                </div>
-                <div class="card bg-dark" style="width: 18rem;">
-                    <div class="card-body">
-                        <% if(currency === '0'){ %>
-                            <h1 class="card-title text-danger font-monospace">$<%= amountFriendOwesYou.toFixed(2) %></h1>
-                        <% } else { %>
-                            <h1 class="card-title text-danger font-monospace">₹<%= amountFriendOwesYou.toFixed(2) %></h1>
-                        <% } %>
-                        <p><%= fname %> owes you</p>
-                    </div>
-                </div>
-                <div class="card bg-dark" style="width: 18rem;">
-                    <div class="card-body">
-                        <% if(currency === '0'){ %>
-                            <h1 class="card-title text-danger font-monospace">$<%= Math.abs(netBalance).toFixed(2) %></h1>
-                        <% } else { %>
-                            <h1 class="card-title text-danger font-monospace">₹<%= Math.abs(netBalance).toFixed(2) %></h1>
-                        <% } %>
-                        <% if(netBalance < 0){ %>
-                            <p>You owe <%= fname %></p>
-                        <% } else if(netBalance > 0){ %>
-                            <p><%= fname %> owes you</p>
-                        <% } else { %>
-                            <p>Settled up!</p>
-                        <% } %>
-                    </div>
-                </div>
-                <div class="card bg-dark" style="width: 18rem;">
-                    <div class="card-body">
-                        <% if(currency === '0'){ %>
-                            <h1 class="card-title text-danger font-monospace">$<%= totalYouPaidOnSplit.toFixed(2) %></h1>
-                        <% } else { %>
-                            <h1 class="card-title text-danger font-monospace">₹<%= totalYouPaidOnSplit.toFixed(2) %></h1>
-                        <% } %>
-                        <p>Total you paid for shared expenses</p>
-                    </div>
-                </div>
-            </div>
-            <div class="settleup w-100 h-50px">
-                <form class="w-100 d-flex justify-content-center" method="post" action="/Show/<%=query%>?_method=DELETE">
-                    <button class="btn btn-outline-danger">Settle Up</button>
-                </form>
-            </div>
-        </div>
-        <div class="recentTransaction mt-4">
-            <div class="headerHeading">
-                <h2 style="color: white;" class="font-monospace">Recent Expenses</h2>
-                <p class="text-white" style="opacity: 0.5;">All shared expenses between you and <%= fname %></p>
-            </div>
-            <% for (let i in result){ %>
-                <div class="individual w-100 bg-dark text-white mb-4" >
-                    <div class="left">
-                        <div class="top">
-                            <p class="font-monospace"> <i class="fa-solid fa-money-check-dollar me-2 h-100 mt-2"></i><b><%= result[i].description %></b></p>
-                        </div>
-                        <div class="bottom ms-4" style="font-size: 0.9rem; opacity: 0.5">
-                            <p class="ms-1"><%= result[i].dateadded %></p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="top">
-                            <% if(result[i].currency === '0'){ %>
-                                <b><p>$ <%= Math.abs(result[i].amount).toFixed(2) %></p></b>
-                            <% } else { %>
-                                <b><p>₹ <%= Math.abs(result[i].amount).toFixed(2) %></p></b>
-                            <% } %>
-                        </div>
-                        <div class="bottom">
-                            <% 
-                                let paidByText = '';
-                                if (result[i].lender === loggedInUsername) {
-                                    paidByText = 'you';
-                                } else if (result[i].lender === query) {
-                                    paidByText = fname; // Friend's name
-                                } else {
-                                    paidByText = 'someone else'; // Fallback just in case
-                                }
-                            %>
-
-                            <% if(result[i].currency === '0'){ %>
-                                <% if(result[i].settlement_option === '0' || result[i].settlement_option === '1'){ %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>$<%= Math.abs(result[i].amount * 2).toFixed(2) %></b> by <%= paidByText %> and split equally</p>
-                                <% } else if(result[i].settlement_option === '2'){ %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2"><%= fname %> owes you <b>$<%= Math.abs(result[i].amount).toFixed(2) %></b></p>
-                                <% } else { %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">You owe <%= fname %> <b>$<%= Math.abs(result[i].amount).toFixed(2) %></b></p>
-                                <% } %>
-                            <% } else { %>
-                                <% if(result[i].settlement_option === '0' || result[i].settlement_option === '1'){ %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">Paid <b>₹<%= Math.abs(result[i].amount * 2).toFixed(2) %></b> by <%= paidByText %> and split equally</p>
-                                <% } else if(result[i].settlement_option === '2'){ %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2"><%= fname %> owes you <b>₹<%= Math.abs(result[i].amount).toFixed(2) %></b></p>
-                                <% } else { %>
-                                    <p style="font-size: 0.9rem; opacity: 0.5" class="ms-2">You owe <%= fname %> <b>₹<%= Math.abs(result[i].amount).toFixed(2) %></b></p>
-                                <% } %>
-                            <% } %>
-                        </div>
-                    </div>
-                </div>
-            <% } %>
-        </div>
         </div>
     </div>
-    <%- include("../includes/needs_validation_bootstrap.ejs") %>
-    <script src="./Javascript/modelScript.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <div class="expense-table-container">
+        <form method="post" action="/settlement/<%=id%>/settle" onsubmit="return confirm('Are you sure you want to settle up? This will remove all transactions between you and <%=friend.name%>.');">
+            <button type="submit" class="btn btn-success mb-3">Settle Up</button>
+        </form>
+        <table class="expense-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(result && result.length>0){ %>
+                    <% for(let i in result){ %>
+                        <tr>
+                            <td><%= result[i].date ? result[i].date.toISOString ? result[i].date.toISOString().split('T')[0] : result[i].date.toString().split('T')[0] : '' %></td>
+                            <td><%=result[i].description %></td>
+                            <td><%=result[i].amount%></td>
+                            <td><%=result[i].details %></td>
+                        </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4" style="text-align: center;">No expenses found</td>
+                    </tr>
+                <% } %>
+                
+            </tbody>
+        </table>
+    </div>
+</div>

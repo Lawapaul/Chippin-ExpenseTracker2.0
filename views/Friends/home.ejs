@@ -1,12 +1,7 @@
 <%- layout("Friends/boilerplate.ejs") %>
 <div class="heading">
     <h1 class="font-monospace">My Friends</h1>
-    <% if(message && message!==null){ %>
-        <br>
-        <p class="opacity-50 mt-3 mb-3"> <%= message %></p>
-    <% } else { %>
         <p class="opacity-50 mt-3 mb-3">Keep track of your friends and their details in one beautiful place</p>
-    <% } %>
     <form>
         <button type="button" class="btn btn-outline-danger addFriend" data-bs-toggle="modal" data-bs-target="#friendModal">+ Add Friend</button>
     </form>
@@ -21,7 +16,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="/Friends" class="needs-validation" novalidate>
+                <form method="post" action="/settlement" class="needs-validation" novalidate>
                     <label class="form-label mt-4 opacity-70 text-white" for="addfriend">Enter Username</label>
                     <input type="text" name="username" id="addfriend" class="form-control" placeholder="Enter friend's username....." required>
                     <button class="btn btn-outline-danger w-100 addfriendbtn mt-4">Add Friend</button>
@@ -32,21 +27,21 @@
 </div>
 
 <div class="friendsCards row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-    <% if(resu && resu.length > 0) { %>
-        <% for(let i = 0; i < resu.length; i++) { %>
+    <% if(result && result.length > 0) { %>
+        <% for(let i = 0; i < result.length; i++) { %>
             <div class="col">
                 <div class="card cardbox bg-dark text-white" style="border-radius: 20px;">
                     <div class="individual mt-4" style="width: 100%;">
                         <img src="/images/9730638.png" class="card-img-top ms-2" alt="..." style="width: 100px;">
-                        <h3 class="card-title ms-3 mt-4 name"><%= resu[i].friend_name %></h3>
+                        <h3 class="card-title ms-3 mt-4 name"><%= result[i].name %></h3>
                     </div>
                     <div class="card-body">
                         <p class="card-text">Making expense tracking fun together, Your reliable friend for shared finances!</p>
                         <div class="btns w-100 d-flex flex-wrap">
-                            <form class="mb-2 mb-md-0" method="get" action="/Show/<%=resu[i].friend_table_name %>">
+                            <form class="mb-2 mb-md-0" method="get" action="/settlement/<%=result[i]._id%>">
                                 <button class="btn btn-outline-danger ms-2">Show Transactions</button>
                             </form>
-                            <form method="post" action="/Delete/<%=resu[i].friend_table_name %>?_method=DELETE">
+                            <form method="post" action="/settlement/<%=result[i]._id%>?_method=DELETE">
                                 <button class="btn btn-danger ms-2">Delete</button>
                             </form>
                         </div>
