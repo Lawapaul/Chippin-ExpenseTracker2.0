@@ -88,12 +88,20 @@ app.use("/settlement",settlementRouter);
 
 // Add root route handler
 app.get('/', (req, res) => {
-    res.redirect('/home');
+    if (req.isAuthenticated()) {
+        res.redirect('/home');
+    } else {
+        res.redirect('/auth');
+    }
 });
 
-// Handle all other routes - redirect to home instead of showing 404
+// Handle all other routes - redirect appropriately based on authentication
 app.use('*',(req,res,next)=>{
-    res.redirect('/home');
+    if (req.isAuthenticated()) {
+        res.redirect('/home');
+    } else {
+        res.redirect('/auth');
+    }
 });
 
 app.use((err,req,res,next)=>{

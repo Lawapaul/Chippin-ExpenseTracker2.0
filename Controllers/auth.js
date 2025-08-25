@@ -101,3 +101,12 @@ module.exports.logout = (req, res) => {
     return res.redirect('/auth');
   });
 }
+
+// Add guest login functionality
+module.exports.guestLogin = (req, res) => {
+  // Create a guest session without creating a user
+  req.session.guestMode = true;
+  req.session.guestId = 'guest_' + Date.now();
+  req.flash("success", "Welcome to Chippin! You're logged in as a guest.");
+  return res.redirect("/home");
+}

@@ -27,4 +27,7 @@ router.route("/verify")
 // Logout route
 router.post("/logout", auth.logout);
 
+// Guest login route
+router.get("/guest", auth.guestLogin);
+
 module.exports = router;
