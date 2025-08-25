@@ -79,11 +79,10 @@ module.exports.newPasswordPost = async (req, res, next) => {
 
     let { new_pass, confirm_pass } = req.body;
     if (new_pass !== confirm_pass) {
-      return res.render("./Login/new_password_request.ejs", {
-        wrongp_flag: true,
-        next_flag: false,
-        title: "New Password",
+      return res.render("Login/new_password_request", {
+        title: "Password Reset",
         style_path: "/auth-reset.css",
+        wrong_flag: req.session.wrong_flag
       });
     } else {
       try {

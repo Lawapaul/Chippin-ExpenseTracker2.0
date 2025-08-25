@@ -2,7 +2,7 @@ const User = require('../models/User.js');
 module.exports.profileGet = async (req, res) => {
     const user = await User.findOne({ username: req.session.passport.user });
     req.session.result = user;
-    res.render("./Settings/settings.ejs", { user: user ,title: 'Profile', style_path: '/Settings-Styles/style.css'});
+    res.render("Settings/settings", { user: user ,title: 'Profile', style_path: '/Settings-Styles/style.css'});
 }
 
 module.exports.logout=(req,res,next)=>{

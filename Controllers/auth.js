@@ -5,7 +5,7 @@ const codeGenerator = () => Math.floor(100000 + Math.random() * 900000);
 
 
 module.exports.loginGet = (req, res) => {
-  res.render('./Login/user_login.ejs', {
+  res.render('Login/user_login', {
     title: "Chippin - Log In",
     style_path: "./style.css",
   });
@@ -16,7 +16,7 @@ module.exports.loginPost = (req, res) => {
     return res.redirect("/home");
 }
 module.exports.createGet = (req, res) => {
-  res.render('./Login/register.ejs', {
+  res.render('Login/register', {
     title: "Create Account",
     style_path: "/create-account.css",
   });
@@ -57,7 +57,7 @@ module.exports.verifyGet = async (req, res, next) => {
     }
   }
 
-  return res.render('./Login/new_account_verification.ejs', {
+  return res.render('Login/new_account_verification', {
     title: "Chippin - Verify",
     style_path: "/auth-reset.css"
   });

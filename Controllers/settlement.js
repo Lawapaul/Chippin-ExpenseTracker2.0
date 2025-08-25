@@ -8,9 +8,9 @@ module.exports.settlementGet = async(req,res)=>{
     if (sortedFriends.length > 0 && sortedFriends[0].spend_date) {
         sortedFriends = sortedFriends.sort((a, b) => new Date(b.spend_date) - new Date(a.spend_date));
     }
-    res.render("./Friends/home.ejs",{
-        title_friends: "Settlement",
-        path_friends: "./Friends-Styles/home.css",
+    res.render("Friends/home",{
+        title: "Friends",
+        style_path: "/Friends-Styles/home.css",
         message: "Harshit",
         result: sortedFriends
     });
@@ -75,9 +75,9 @@ module.exports.individual = async(req,res)=>{
             }
         }
     }
-    res.render("./ShowPage/home-page.ejs", {
+    res.render("ShowPage/home-page", {
+        title: "Show Page",
         style_path: "/Expenses-Style/style.css",
-        title: 'Chippin - Show',
         id,
         result: transaction.settlement.filter(s =>
             (s.payer.equals(res.locals.currentUser._id) && s.participant.equals(friend._id)) ||

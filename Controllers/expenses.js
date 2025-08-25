@@ -18,9 +18,9 @@ module.exports.homeGET = async (req, res) => {
                    expenseDate.getFullYear() === currentDate.getFullYear();
         });
         const currentMonthSum = currentMonthExpenses.reduce((sum, expense) => sum + expense.amount, 0);
-        res.render("./Expenses/expenses-home.ejs", {
-            title: "Expenses",
-            style_path: "/Expenses-Style/expense-style.css",
+        res.render("Expenses/expenses-home", {
+            title: "All Expenses",
+            style_path: "/Expenses-Style/style.css",
             result: expenses,
             resultSum: [{ t_sum: totalSum }],
             currentMonthSum: [{ t_sum: currentMonthSum }]
